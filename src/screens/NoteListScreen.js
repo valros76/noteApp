@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { RefreshControl, View, StyleSheet, Text, Alert, FlatList } from 'react-native';
 import colors from '../shared/theme/colors';
-import { RoundIconBtn } from '../components';
+import { RoundIconBtn, NoteInputModal } from '../components';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNotes } from "../shared/context/NoteProvider";
 import { reverseIntDatas } from "../shared/functions/SortFunctions";
@@ -36,7 +36,7 @@ const NoteListScreen = ({ userName, navigation }) => {
       setModalVisible(!modalVisible);
    }
 
-   const handleSubmit = async (title, description) => {
+   const handleOnSubmit = async (title, description) => {
       let author = (userName !== undefined && userName !== null) ? userName : null;
 
       const actualTime = Date.now();
@@ -65,28 +65,42 @@ const NoteListScreen = ({ userName, navigation }) => {
                </Text>
             </View>
             : null}
-            <View style={styles.addBtnContainer}>
-               <RoundIconBtn
-                  iconName="clipboard-pencil"
-                  iconType="foundation"
-                  style={styles.addBtn}
-                  color={colors.WHITE}
-                  onPress={toggleModal}
-               />
-            </View>
+         <View style={styles.addBtnContainer}>
+            <RoundIconBtn
+               iconName="clipboard-pencil"
+               iconType="foundation"
+               style={styles.addBtn}
+               color={colors.WHITE}
+               onPress={toggleModal}
+            />
+         </View>
+         <NoteInputModal
+            isEdit={false}
+            visible={modalVisible}
+            toggleModal={toggleModal}
+            modalRequestClose={() => {
+               Alert.alert("Quitter", "Souhaitez-vous quitter l'ajout de notes ?", [
+                  { text: "Non" },
+                  {
+                     text: "Oui",
+                     onPress: () => toggleModal()
+                  }
+               ]);
+            }}
+            onSubmit={handleOnSubmit}
+         />
       </View>
    )
-
 }
 
 const styles = StyleSheet.create({
    container: {
-      flex:1,
+      flex: 1,
       backgroundColor: colors.ULTRALIGHT,
       justifyContent: "flex-start",
-      paddingVertical:6,
-      paddingHorizontal:12,
-      zIndex:1,
+      paddingVertical: 6,
+      paddingHorizontal: 12,
+      zIndex: 1,
    },
    emptyHeaderContainer: {
 
@@ -98,7 +112,7 @@ const styles = StyleSheet.create({
 
    },
    addBtn: {
-      
+
    },
 });
 
