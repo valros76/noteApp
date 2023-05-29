@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, Dimensions } from 'react-native';
 import colors from '../shared/theme/colors';
 import { getWidth, getHeight } from '../shared/constants/ScreenSize';
-import { setUsername, getUsername } from '../shared/functions/AsyncFunctions';
-import {RoundIconBtn, ReplacementView} from '../components';
+import { RoundIconBtn, ReplacementView } from '../components/';
+import { setUsername, getUsername } from "../shared/functions/AsyncFunctions";
 
 const screenWidth = getWidth();
 const screenHeight = getHeight();
@@ -15,35 +15,34 @@ const HomeScreen = ({ userName, modifyGlobalUsername, setNavUserName, navigation
 
    const initUsername = async () => {
       getUsername()
-      .then((newUser)=>{
-         if(newUser !== null){
-            setName(JSON.parse(newUser).name);
-         }
-      });
+         .then((newUser) => {
+            if(newUser !== null){
+               setName(JSON.parse(newUser).name);
+            }
+         })
    }
 
-   useEffect(()=>{
-      if(name === ""){
+   useEffect(() => {
+      if (name === "") {
          initUsername();
       }
 
-      if(userName !== "" && name !== userName){
+      if (userName !== "" && name !== userName) {
          setName(userName);
       }
    }, []);
 
    const handleTextChange = (text) => {
       setName(text.trim());
-   }
+   };
 
    const handleSubmit = async () => {
       const user = { name: name };
       await setUsername(JSON.stringify(user));
       setNavUserName(name);
       modifyGlobalUsername(name);
-      navigation.navigate("NoteList");
+      navigation.navigate("NotesList");
    }
-
 
    return (
       <View style={styles.container}>
@@ -56,24 +55,11 @@ const HomeScreen = ({ userName, modifyGlobalUsername, setNavUserName, navigation
             value={name}
             onChangeText={handleTextChange}
          />
+         {debug ? <Text style={styles.userText}> [ {name} ] </Text> : null}
 
-         {debug ? <Text style={styles.userText}>[ {name} ]</Text> : null}
-
-         {name?.trim()?.length > 0 ? 
-            <RoundIconBtn
-               iconName="arrow-right"
-               iconType="foundation"
-               color={colors.WHITE}
-               size={24}
-               onPress={handleSubmit}
-               style={{ 
-                  borderRadius:12,
-                  padding: 16,
-                }}
-            /> : <ReplacementView width="100%" padding={40}/>
-         }
+         {name?.trim()?.length > 0 ? <RoundIconBtn iconName="arrow-right" iconType="foundation" color={colors.WHITE} size={24} onPress={handleSubmit} style={{ borderRadius:12, padding:16,}} /> : <ReplacementView width="100%" padding={40} />}
       </View>
-   );
+   )
 }
 
 const styles = StyleSheet.create({
@@ -109,6 +95,5 @@ const styles = StyleSheet.create({
       fontSize: 24,
    },
 });
-
 
 export default HomeScreen;

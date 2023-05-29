@@ -1,20 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { View, StyleSheet, TextInput } from 'react-native';
 import { getWidth, getHeight } from "../shared/constants/ScreenSize";
 import colors from "../shared/theme/colors";
-import RoundIconBtn from './RoundIconBtn';
+import RoundIconBtn from "./RoundIconBtn";
 
 const SearchBar = ({ containerStyle, value, onChangeText, onClear }) => {
+
    return (
-      <View
-         style={[styles.container, { ...containerStyle }]}
-      >
+      <View style={[styles.container, { ...containerStyle }]}>
          <TextInput
             value={value}
             onChangeText={onChangeText}
             style={styles.searchBar}
-            placeholder="Entrez votre recherche"
-         />
+            placeholder="Entrez votre recherche" />
          <View style={styles.iconContainer}>
             {value ?
                <RoundIconBtn
@@ -49,19 +47,19 @@ const styles = StyleSheet.create({
       borderColor: colors.PRIMARY,
       height: 40,
       borderRadius: 40,
-      paddingHorizontal: 12,
+      paddingLeft: 12,
+      paddingRight: 12,
       fontSize: 20,
       color: colors.PRIMARY,
    },
-   iconContainer: {
-      position: "absolute",
-      right: 6,
-      zIndex: 2,
+   iconContainer:{
+      position:"absolute",
+      right:6,
+      zIndex:2,
    },
    icon: {
       padding: 6,
    }
-
 })
 
 export default SearchBar;

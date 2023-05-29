@@ -1,5 +1,5 @@
 export function reverseIntDatas(data){
-   return data.sort((a, b)=>{
+   return data.sort((a, b) => {
       const aInt = parseInt(a.time || a.id);
       const bInt = parseInt(b.time || b.id);
       if (aInt < bInt) return 1;

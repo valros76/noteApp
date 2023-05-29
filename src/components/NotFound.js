@@ -4,6 +4,7 @@ import RoundIconBtn from "./RoundIconBtn";
 import colors from "../shared/theme/colors";
 
 const NotFound = () => {
+
    return (
       <View
          style={[StyleSheet.absoluteFillObject, styles.container]}
@@ -17,13 +18,11 @@ const NotFound = () => {
                style={styles.icon}
             />
          </View>
-         <Text
-            style={{ marginTop: 20, fontSize: 24, alignSelf: "center", }}
-         >
+         <Text style={{ marginTop: 20, fontSize: 24, alignSelf: "center", }}>
             Aucun résultat
          </Text>
       </View>
-   )
+   );
 }
 
 const styles = StyleSheet.create({

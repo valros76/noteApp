@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { View, TouchableWithoutFeedback, StyleSheet, Alert, TextInput, ScrollView } from "react-native";
+import React, { useState, useEffect } from 'react';
+import { ScrollView, View, TextInput, StyleSheet, Alert } from 'react-native';
 import Modal from "react-native-modal";
-import RoundIconBtn from "./RoundIconBtn";
 import colors from "../shared/theme/colors";
-import { getHeight } from "../shared/constants/ScreenSize";
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { getHeight } from '../shared/constants/ScreenSize';
+import RoundIconBtn from "./RoundIconBtn";
 
 const NoteInputModal = ({ visible, toggleModal, modalRequestClose, onSubmit, note, isEdit }) => {
    const [title, setTitle] = useState("");
@@ -26,10 +27,10 @@ const NoteInputModal = ({ visible, toggleModal, modalRequestClose, onSubmit, not
    }
 
    const closeModal = () => {
-      Alert.alert("Quitter", "Voulez-vous quitter l'ajout de notes ?", [
-         { text: "Non" },
+      Alert.alert("Quitter", "Voulez-vous quitter l'ajout de note ?", [
+         { text: 'Non' },
          {
-            text: "Oui",
+            text: 'Oui',
             onPress: () => {
                if (!isEdit) {
                   setTitle("");
@@ -37,7 +38,7 @@ const NoteInputModal = ({ visible, toggleModal, modalRequestClose, onSubmit, not
                }
                toggleModal();
             }
-         }
+         },
       ]);
    }
 
@@ -45,8 +46,7 @@ const NoteInputModal = ({ visible, toggleModal, modalRequestClose, onSubmit, not
       if (title !== "" && description !== "") {
          if (isEdit) {
             onSubmit(title, description, Date.now());
-         }
-         else {
+         } else {
             onSubmit(title, description);
             setTitle("");
             setDescription("");
@@ -54,13 +54,13 @@ const NoteInputModal = ({ visible, toggleModal, modalRequestClose, onSubmit, not
          toggleModal();
       } else {
          if (title === "") {
-            Alert.alert("Titre manquant", "Vous devez indiquer un titre à la note", [
-               { text: "Ok" },
+            Alert.alert("Titre manquant", "Vous devez donner un titre à la note.", [
+               { text: 'OK' },
             ]);
          }
-         if (title !== "" && description === "") {
+         if (title != "" && description === "") {
             Alert.alert("Description manquante", "Vous devez ajouter du contenu à la note avant de l'ajouter", [
-               { text: "Ok" },
+               { text: 'OK' },
             ]);
          }
       }
@@ -70,11 +70,10 @@ const NoteInputModal = ({ visible, toggleModal, modalRequestClose, onSubmit, not
       <Modal
          visible={visible}
          animationType="slide"
-         style={{ margin: 0, }}
+         style={{ margin: 0 }}
          backgroundTransitionOutTiming={0}
          onRequestClose={modalRequestClose}
       >
-
          <View style={styles.container}>
             <TextInput
                value={title}
@@ -91,37 +90,30 @@ const NoteInputModal = ({ visible, toggleModal, modalRequestClose, onSubmit, not
                   onChangeText={(text) => handleOnChangeText(text, "description")}
                />
             </ScrollView>
-         </View>
-
-         <View style={styles.checkBtnContainer}>
-            <RoundIconBtn
-               iconName="x"
-               iconType="foundation"
-               size={24}
-               color={colors.WHITE}
-               style={styles.closeModalBtn}
-               onPress={closeModal}
-            />
-            <RoundIconBtn
-               iconName="plus"
-               iconType="foundation"
-               size={24}
-               color={colors.WHITE}
-               style={styles.checkBtn}
-               onPress={handleAddNewNote}
-            />
-         </View>
-
-         <TouchableWithoutFeedback
-            style={[styles.modalBackgroundContainer,
-            StyleSheet.absoluteFillObject]}
-         >
-            <View style={[styles.modalBackground, StyleSheet.absoluteFillObject]}>
+            <View style={styles.checkBtnContainer}>
+               <RoundIconBtn
+                  iconName="x"
+                  iconType="foundation"
+                  size={24}
+                  color={colors.WHITE}
+                  style={styles.closeModalBtn}
+                  onPress={closeModal}
+               />
+               <RoundIconBtn
+                  iconName="plus"
+                  iconType="foundation"
+                  size={24}
+                  color={colors.WHITE}
+                  style={styles.checkBtn}
+                  onPress={handleAddNewNote}
+               />
             </View>
+         </View>
+         <TouchableWithoutFeedback style={[styles.modalBackgroundContainer, StyleSheet.absoluteFillObject]}>
+            <View style={[styles.modalBackground, StyleSheet.absoluteFillObject]}></View>
          </TouchableWithoutFeedback>
-
       </Modal>
-   )
+   );
 }
 
 const styles = StyleSheet.create({
@@ -172,9 +164,6 @@ const styles = StyleSheet.create({
    closeModalBtn: {
       padding: 12,
       backgroundColor: colors.ERROR,
-   },
-   modalBackgroundContainer: {
-
    },
 })
 

@@ -1,52 +1,40 @@
-import React from "react";
-import {Text, StyleSheet, TouchableOpacity} from "react-native";
+import React from 'react';
+import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 import colors from "../shared/theme/colors";
-import {getWidth} from "../shared/constants/ScreenSize";
+import { getWidth } from "../shared/constants/ScreenSize"
 
-const Note = ({item, onPress}) => {
-   const {title, description, author} = item;
-
-   return(
-      <TouchableOpacity
-         style={styles.container}
-         onPress={onPress}
-      >
-      <Text 
-         numberOfLines={2}
-         style={styles.title}
-      >
-         {title}
-      </Text>
-      <Text
-         numberOfLines={2}
-         style={styles.description}
-      >
-         {description}
-      </Text>
-      {author !== null ? 
-         <Text
-            numberOfLines={2}
-            style={styles.author}
+const Note = ({ item, onPress }) => {
+   const { title, description, author } = item;
+   return (
+         <TouchableOpacity 
+            style={styles.container}
+            onPress={onPress}
          >
-            DE : {author}
-         </Text>
-         : null}
-      </TouchableOpacity>
-   )
+            <Text numberOfLines={2} style={styles.title}>
+               {title}
+            </Text>
+            <Text numberOfLines={2} style={styles.description}>
+               {description}
+            </Text>
+            {author !== null ? <Text numberOfLines={2} style={styles.author}>
+               DE : {author}
+            </Text> : null}
+         </TouchableOpacity>
+   );
 }
 
 const styles = StyleSheet.create({
    container: {
-      width: (getWidth() / 2 ) - 50,
+      width: (getWidth() / 2) - 50,
       alignSelf: "center",
-      paddingVertical:6,
-      paddingHorizontal:12,
+      paddingVertical: 6,
+      paddingHorizontal: 12,
       backgroundColor: colors.SECONDARY,
-      margin:12,
-      borderRadius:6,
+      margin: 12,
+      borderRadius: 6,
    },
    title: {
-      fontSize:24,
+      fontSize: 24,
       fontWeight: "bold",
       marginBottom: 12,
       color: colors.BLACK,
@@ -58,9 +46,9 @@ const styles = StyleSheet.create({
    },
    author: {
       minHeight: 20,
-      fontSize:12,
-      color:colors.BLACK,
-      opacity:0.5,
+      fontSize: 12,
+      color: colors.BLACK,
+      opacity: 0.5,
    }
 })
 

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "formation-note-app",
-    "slug": "formation-note-app",
+    "name": "noteApp",
+    "slug": "noteApp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",
@@ -21,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.webdevoo.noteApp"
     },
     "web": {
       "favicon": "./src/assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "ed3992a2-5159-4ed0-9142-1c2daca64d1d"
+      }
     }
   }
 }
